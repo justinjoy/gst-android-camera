@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="white_balance_mode">
+        <item>auto</item>
+        <item>daylight</item>
+        <item>cloudy-daylight</item>
+        <item>twilight</item>
+        <item>incandescent</item>
+        <item>fluorescent</item>
+        <item>manual</item>
+        <item>warm-fluorescent</item>
+        <item>shade</item>
+    </string-array>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/white_balance_view_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="White Balance Mode"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:visibility="visible"
+        tools:text="White Balance Mode" />
+
+    <Spinner
+        android:id="@+id/white_balance_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:dropDownWidth="match_parent"
+        android:entries="@array/white_balance_mode"
+        android:visibility="visible" />
+
+</LinearLayout>
