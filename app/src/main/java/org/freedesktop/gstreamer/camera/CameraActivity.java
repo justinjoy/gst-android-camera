@@ -1,9 +1,13 @@
 package org.freedesktop.gstreamer.camera;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,6 +28,8 @@ import org.freedesktop.gstreamer.examples.camera.R;
  * status bar and navigation/system bar) with user interaction.
  */
 public class CameraActivity extends AppCompatActivity {
+
+    private static final int PERMISSION_REQUEST_CAMERA = 1;
 
     private GstAhc gstAhc;
     /**
@@ -101,6 +107,14 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[] { Manifest.permission.CAMERA },
+                    PERMISSION_REQUEST_CAMERA);
+            return;
+        }
         try {
             gstAhc = GstAhc.init(this);
         } catch (Exception e) {
