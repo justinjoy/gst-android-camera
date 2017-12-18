@@ -425,6 +425,19 @@ gst_native_set_white_balance (JNIEnv * env, jobject thiz, jint wb_mode)
 }
 
 void
+gst_native_set_auto_focus (JNIEnv * env, jobject thiz, jboolean enabled)
+{
+  GstAhc *ahc = GET_CUSTOM_DATA (env, thiz, native_android_camera_field_id);
+
+  if (!ahc)
+    return;
+
+  GST_DEBUG ("Setting Autofocus (%d)", enabled);
+
+  gst_photography_set_autofocus (GST_PHOTOGRAPHY (ahc->ahcsrc), enabled);
+}
+
+void
 gst_native_set_rotate_method (JNIEnv * env, jobject thiz, jint method)
 {
   GstAhc *ahc = GET_CUSTOM_DATA (env, thiz, native_android_camera_field_id);
@@ -450,7 +463,9 @@ static JNINativeMethod native_methods[] = {
   {"nativeSetRotateMethod", "(I)V",
       (void *) gst_native_set_rotate_method},
   {"nativeSetWhiteBalance", "(I)V",
-      (void *) gst_native_set_white_balance}
+      (void *) gst_native_set_white_balance},
+  {"nativeSetAutoFocus", "(Z)V",
+      (void *) gst_native_set_auto_focus}
 };
 
 jint
@@ -464,6 +479,7 @@ JNI_OnLoad (JavaVM * vm, void *reserved)
    *  setenv ("GST_DEBUG_NO_COLOR", "1", 1);
    */
 
+  setenv ("GST_DEBUG", "*:4,ahc:5,camera-test:5,ahcsrc:5", 1);
   GST_DEBUG_CATEGORY_INIT (debug_category, "camera-test", 0,
       "Android Gstreamer Camera test");
 

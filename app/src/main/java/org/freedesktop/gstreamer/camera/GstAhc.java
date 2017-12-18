@@ -33,6 +33,8 @@ public class GstAhc implements Closeable, SurfaceHolder.Callback {
 
     private native void nativeSetRotateMethod(int orientation);
 
+    private native void nativeSetAutoFocus(boolean enabled);
+
     public enum Rotate {
         NONE,
         CLOCKWISE,
@@ -155,6 +157,11 @@ public class GstAhc implements Closeable, SurfaceHolder.Callback {
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
         Log.d(TAG, "Surface destroyed");
         nativeSurfaceFinalize();
+    }
+
+    public void setAutoFocus(boolean enabled) {
+        Log.d(TAG, "AutoFocus: " + enabled);
+        nativeSetAutoFocus (enabled);
     }
 
     public void setWhiteBalanceMode(String mode) {

@@ -16,6 +16,7 @@ import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -259,6 +260,18 @@ public class CameraActivity extends AppCompatActivity {
                     gstAhc.changeResolutionTo(640, 480);
                 }
                     break;
+        }
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.autofocus:
+                    gstAhc.setAutoFocus(checked);
+                break;
+            default:
+                break;
         }
     }
 
