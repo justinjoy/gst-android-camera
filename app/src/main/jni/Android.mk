@@ -25,9 +25,9 @@ include $(CLEAR_VARS)
 
 LOCAL_CFLAGS := -DGST_USE_UNSTABLE_API
 LOCAL_MODULE    := android_camera
-LOCAL_SRC_FILES := android_camera.c
+LOCAL_SRC_FILES := android_camera.c dummy.cpp
 LOCAL_SHARED_LIBRARIES := gstreamer_android
-LOCAL_LDLIBS := -landroid -llog
+LOCAL_LDLIBS := -llog -landroid
 include $(BUILD_SHARED_LIBRARY)
 
 ifeq ($(TARGET_ARCH_ABI),armeabi)
@@ -52,4 +52,6 @@ GSTREAMER_PLUGINS	:=  $(GSTREAMER_PLUGINS_CORE) \
 			    $(GSTREAMER_PLUGINS_CODECS) \
 			    opengl
 
+# Needed for new versions of gstreamer
+GSTREAMER_EXTRA_DEPS      := gstreamer-video-1.0 gstreamer-photography-1.0
 include $(GSTREAMER_NDK_BUILD_PATH)/gstreamer-1.0.mk
